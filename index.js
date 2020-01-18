@@ -171,14 +171,17 @@ class HorsengelRoulette {
 		}
 	}
 
+	
+
 	async kick(player, description) {
 		if (this.bot.hasPermission('KICK_MEMBERS')) {
 			await this.channel.send(`${this.prefix}kick ${player} ${description}`);
 			await this.channel.send({embed: this.embedKick(player.user, description)});
-			const invite = await this.guild.defaultChannel.createInvite({maxAge: 0, maxUses: 1});
-			await player.user.send(invite.url);
+			await this.channel.createInvite({maxAge: 0}).then(invite => {
+			await player.user.send(`**Voici ton lien d'invitation**: ${invite}`);
 			return player.kick(player, description);
-		}
+		})
+	}
 
 		return this.channel.send('Je n\'ai pas la permission de kick.');
 	}
