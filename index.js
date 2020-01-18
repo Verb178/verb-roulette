@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 
-// Bioman is the name of the bot which originally directly included the Horsengel roulette. It means "the bot that implements this module".
-class HorsengelRoulette {
+
+class Verbroulette {
 	constructor(msg, player1, player2, prefix, language) {
 		this.bot = msg.guild.me;
 		this.channel = msg.channel;
@@ -11,10 +11,10 @@ class HorsengelRoulette {
 		this.revolver = [];
 		this.revolverString = '[o][o][o][o][o][o]';
 
-		// Language
+
 		const regex = new RegExp('^[a-z]{2}(-[A-Z]{2})?$');
 
-		if (regex.test(language)) { // Language format (xx-YY) verification
+		if (regex.test(language)) { 
 			language = language.substring(0, 2);
 		}
 
@@ -26,16 +26,16 @@ class HorsengelRoulette {
 	}
 
 	load(magazine, bullets) {
-		// Initialise the chambers
+
 		for (let chamber = 0; chamber < magazine; chamber++) {
 			this.revolver[chamber] = 0;
 		}
 
-		// Adds bullets to random chambers
+
 		const addBullets = (revolver) => {
 			let chamber;
 			
-			if (this.players[1].id === this.bot.id) { // B doesn't lose
+			if (this.players[1].id === this.bot.id) { 
 				chamber = Math.floor(Math.random() * (magazine / 2)) * 2;
 			} else {
 				chamber = Math.floor(Math.random() * (magazine));
@@ -57,7 +57,7 @@ class HorsengelRoulette {
 	}
 
 	async start() {
-		// Stops the game if both players are the same member
+
 		if (this.players[1].id === this.players[0].id) {
 			if (this.players[0].id === this.guild.ownerID) {
 				return this.channel.send('Je ne peux pas vous suggérer de vous tirer. J\'aurais des remords après.');
@@ -70,12 +70,11 @@ class HorsengelRoulette {
 
 		let answer = true;
 
-		// A bot is provoked
 		if (this.players[1].user.bot) {
-			// Bioman is provoked
+
 			if (this.players[1].id === this.bot.id) {
 				await this.sleep();
-				// Bot refuses to play
+
 				const mood = Math.floor(Math.random() * 10);
 				if (mood === 5) {
 					if (this.players[1].user.id === this.guild.ownerID) {
@@ -86,13 +85,13 @@ class HorsengelRoulette {
 						return this.kick(players[0], description);
 					}
 				}
-				// Bioman accepts to play
+
 				this.channel.send(`${this.prefix}oui`);
-			// An other bot is provoked
+
 			} else {
 				return this.channel.send(`Il est impossible de jouer contre ${this.players[1]}.`)
 			}
-		// A member is provoked
+
 		} else {
 			answer = await this.channel.awaitMessages((msg) => {
 				if (msg.author.id === this.players[1].id && msg.content === `${this.prefix}oui`) {
@@ -105,7 +104,7 @@ class HorsengelRoulette {
 			});
 		}
 
-		// The provoked member refuses to play
+
 		if (!answer) {
 			return this.channel.send(`${this.players[1]} a préféré s'enfuir.`);
 		}
@@ -117,15 +116,15 @@ class HorsengelRoulette {
 		let player = this.players[0];
 
 		for (let chamber = 0; chamber < this.revolver.length; chamber++) {
-			// Waiting for the answer
+
 			this.channel.send(`${player}, c'est ton tour de tirer. Vous devriez utiliser la commande ${this.prefix}pan pour tirer. (Vous avez 30 secondes.)`);
 
 			let answer = true;
-			// Game against the bot
+
 			if (player.id === this.bot.id) {
 				await this.sleep();
 				this.channel.send(`${this.prefix}pan`);
-			// Game against a member
+
 			} else {
 				answer = await this.channel.awaitMessages((msg) => {
 					if (msg.author.id === player.id && msg.content === `${this.prefix}pan`) {
@@ -138,23 +137,23 @@ class HorsengelRoulette {
 				});
 			}
 
-			// Game abandoned by a player
+
 			if (!answer) {
 				return this.channel.send(`${player} a préféré s'enfuir.`);
 			}
 
-			// No bullet
+
 			if (this.revolver[chamber] === 0) {
 				await this.channel.send({embed: this.embedRound(chamber, `${player} a tiré, mais il est toujours en vie.`)});
-			// Game over
+
 			} else {
-				// The loser is the guild owner
+
 				if (player.user.id === this.guild.ownerID) {
 					return this.channel.send({embed: this.embedRound(chamber, `Je n'ai pas le droit de virer ${player} mais je peux dire qu'il a perdu.`, true)});
-				// Loser is Bioman
+
 				} else if (player.user.id === this.bot.id) {
 					return this.channel.send('Il doit y avoir une erreur...');
-				// The loser is a member
+
 				} else {
 					await this.channel.send({embed: this.embedRound(chamber, `${player} perd.`, true)});
 					const description = 'a perdu la roulette russe';
@@ -162,7 +161,7 @@ class HorsengelRoulette {
 				}
 			}
 	
-			// Player swticher
+
 			if (player.id  === this.players[0].id) {
 				player = this.players[1];
 			} else {
@@ -178,12 +177,12 @@ class HorsengelRoulette {
 			await this.channel.send(`${this.prefix}kick ${player} ${description}`);
 			await this.channel.send({embed: this.embedKick(player.user, description)});
 			await this.channel.createInvite({maxAge: 0}).then(invite => {
-			player.user.send(`**Voici ton lien d'invitation**: ${invite}`);
+			await player.user.send(`**Voici ton lien d'invitation**: ${invite}`);
 			return player.kick(player, description);
 		})
 	}
 
-
+		return this.channel.send('Je n\'ai pas la permission de kick.');
 	}
 
 	async sleep() {
@@ -192,7 +191,7 @@ class HorsengelRoulette {
 
 	embedRound(round, description, gameOver = false) {
 		round++;
-		let index = round * 3 - 2; // Brackets management
+		let index = round * 3 - 2;
 
 		const replaceAt = (str, char, i) => {
 			if (i > str.length - 1 || str.charAt(i) === char) {
@@ -201,7 +200,6 @@ class HorsengelRoulette {
 			return str.substr(0, i) + char + str.substr(i + 1);
 		};
 
-		// Replaces the character between brackets by 1, 2 or X
 		if (round > 0) {
 			if (gameOver) {
 				this.revolverString = replaceAt(this.revolverString, 'X', index);
@@ -233,7 +231,6 @@ class HorsengelRoulette {
 		return new Discord.RichEmbed()
 			.setAuthor(this.bot.user.tag, this.bot.user.displayAvatarURL)
 			.setColor('ORANGE')
-			//.setImage('https://img1.closermag.fr/var/closermag/storage/images/media/images-des-contenus/article/2016-08-04-corbier-l-ancien-complice-de-dorothee-je-deviens-ce-que-les-medias-ont-fait-de-moi-c-est-a-dire-rien/archive-corbier-1989/5405200-2-fre-FR/Archive-Corbier-1989_exact1024x768_l.jpg')
 			.setThumbnail(kicked.displayAvatarURL)
 			.addField('Action', 'Kick', true)
 			.addField('Raison', reason, true)
@@ -244,4 +241,4 @@ class HorsengelRoulette {
 	
 }
 
-module.exports = HorsengelRoulette;
+module.exports = Verbroulette;
