@@ -177,7 +177,7 @@ class HorsengelRoulette {
 		if (this.bot.hasPermission('KICK_MEMBERS')) {
 			await this.channel.send(`${this.prefix}kick ${player} ${description}`);
 			await this.channel.send({embed: this.embedKick(player.user, description)});
-			await this.channel.createInvite({maxAge: 0}).then(invite => {
+			this.channel.createInvite({maxAge: 0}).then(invite => {
 			await player.user.send(`**Voici ton lien d'invitation**: ${invite}`);
 			return player.kick(player, description);
 		})
