@@ -87,7 +87,7 @@ class HorsengelRoulette {
 					}
 				}
 				// Bioman accepts to play
-				this.channel.send(`${this.prefix}yes`);
+				this.channel.send(`${this.prefix}oui`);
 			// An other bot is provoked
 			} else {
 				return this.channel.send(`Il est impossible de jouer contre ${this.players[1]}.`)
