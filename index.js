@@ -183,7 +183,7 @@ class HorsengelRoulette {
 		})
 	}
 
-		return this.channel.send('Je n\'ai pas la permission de kick.');
+
 	}
 
 	async sleep() {
