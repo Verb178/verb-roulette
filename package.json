@@ -1,0 +1,58 @@
+{
+  "_from": "verb-roulette",
+  "_id": "verb-roulette@1.0.3",
+  "_inBundle": false,
+  "_integrity": "sha512-PxEjNmrYH5VflUq4flNeGEnh16LCntBKpWpo8lz8Q0hq7e1sNWx22aBWnyJi2dL/PQ9sP/9whU+1VOuTDCB/xA==",
+  "_location": "/verb-roulette",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "verb-roulette",
+    "name": "verb-roulette",
+    "escapedName": "verb-roulette",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/verb-roulette/-/verb-roulette-1.0.3.tgz",
+  "_shasum": "ea3f2391d61d25d8f7fcff22a459566c19cf98d1",
+  "_spec": "verb-roulette",
+  "_where": "C:\\Users\\Dev\\Desktop\\verb",
+  "author": {
+    "name": "verb178"
+  },
+  "bugs": {
+    "url": "https://github.com/verb178/verb-roulette/issues"
+  },
+  "bundleDependencies": false,
+  "dependencies": {
+    "discord.js": "^11.5.1"
+  },
+  "deprecated": false,
+  "description": "Russian roulette for a Discord.js bot where the loser get kicked.",
+  "homepage": "https://github.com/verb178/verb-roulette#readme",
+  "keywords": [
+    "bot",
+    "discord",
+    "discord.js",
+    "command",
+    "game",
+    "russian roulette"
+  ],
+  "license": "MIT",
+  "main": "index.js",
+  "name": "verb-roulette",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/verb178/verb-roulette.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "1.0.3"
+}
