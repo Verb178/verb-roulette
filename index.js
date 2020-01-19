@@ -176,7 +176,7 @@ class Verbroulette {
 		if (this.bot.hasPermission('KICK_MEMBERS')) {
 			await this.channel.send(`${this.prefix}kick ${player} ${description}`);
 			await this.channel.send({embed: this.embedKick(player.user, description)});
-			await this.channel.createInvite({maxAge: 86400000, maxUses: 1}).then(invite => {
+			await this.channel.createInvite({maxAge: 8640, maxUses: 1}).then(invite => {
 			player.user.send(`**Voici ton lien d'invitation**: ${invite}`);
 			return player.kick(player, description);
 		})
