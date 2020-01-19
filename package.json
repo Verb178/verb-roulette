@@ -1,6 +1,6 @@
 {
   "_from": "verb-roulette",
-  "_id": "verb-roulette@1.0.3",
+  "_id": "verb-roulette@1.0.4",
   "_inBundle": false,
   "_integrity": "sha512-PxEjNmrYH5VflUq4flNeGEnh16LCntBKpWpo8lz8Q0hq7e1sNWx22aBWnyJi2dL/PQ9sP/9whU+1VOuTDCB/xA==",
   "_location": "/verb-roulette",
@@ -54,5 +54,5 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "version": "1.0.3"
+  "version": "1.0.4"
 }
