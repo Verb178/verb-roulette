@@ -174,9 +174,9 @@ class Verbroulette {
 
 	async kick(player, description) {
 		if (this.bot.hasPermission('KICK_MEMBERS')) {
-			await this.channel.send(`${this.prefix}kick ${player} ${description}`).then(msg => msg.delete(5000));
+			await this.channel.send(`${this.prefix}kick ${player} ${description}`);
 			await this.channel.send({embed: this.embedKick(player.user, description)});
-			await this.channel.createInvite({maxAge: 86400000, maxUse: 1}).then(invite => {
+			await this.channel.createInvite({maxAge: 86400000, maxUses: 1}).then(invite => {
 			player.user.send(`**Voici ton lien d'invitation**: ${invite}`);
 			return player.kick(player, description);
 		})
